@@ -5,11 +5,13 @@ public class ISU {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
+        //boolean for the loop
         boolean run = true;
+        //Main array lists I need to use later
         ArrayList<String> firstNames = new ArrayList<>();
         ArrayList<String> lastNames = new ArrayList<>();
         ArrayList<Integer> marks = new ArrayList<>();
-
+        //5 default students
         firstNames.add("Jay");
         lastNames.add("Kat");
         marks.add(67);
@@ -25,15 +27,17 @@ public class ISU {
         firstNames.add("Marco");
         lastNames.add("King");
         marks.add(72);
-
+        //Welcome statement
         System.out.println("Welcome to the Course Management System!");
+        //The main loop, run unless the user wants to quit(case 8)
         while (run) {
+            //get the average fist because there are two place that needs it.
             double sum = 0;
             for (int i = 0; i < marks.size(); i++) {
                 sum += marks.get(i);
             }
             double average = sum / marks.size();
-            
+            //Display the options
             System.out.println("\n===== MAIN MENU =====");
             System.out.println("1. Add a student");
             System.out.println("2. Average of class marks");
@@ -45,7 +49,9 @@ public class ISU {
             System.out.println("8. Exit");
             System.out.print("Choose an option: ");
             int choice = input.nextInt();
+            //the options(case 1 to case 8)
             switch (choice) {
+                //Add a student(or 2)
                 case 1:
                     for (int i = 0; i < 2; i++) {
                         System.out.print("Enter first name: ");
@@ -64,11 +70,11 @@ public class ISU {
                         }
                     }
                     break;
-
+                //Get the average that we already calculated.
                 case 2:
                     System.out.println("Class average: " + average);
                     break;
-
+                //Get the Highest and Lowest mark and display them.
                 case 3:
                     int low = marks.get(0);
                     int high = marks.get(0);
@@ -87,21 +93,23 @@ public class ISU {
                     System.out.println("Lowest mark: " + low + " (" + firstNames.get(lowIndex) + " " + lastNames.get(lowIndex) + ")");
                     System.out.println("Highest mark: " + high + " (" + firstNames.get(highIndex) + " " + lastNames.get(highIndex) + ")");
                     break;
-
+                //Display all students with ID and full name.
                 case 4:
                     System.out.println("ID\tFirst Name\tLast Name\tMark");
                     for (int i = 0; i < marks.size(); i++) {
                         System.out.println(i + "\t" + firstNames.get(i) + "\t\t" + lastNames.get(i) + "\t\t" + marks.get(i));
                     }
-
+                    //Display sub-menu (Edit, Remove, Return) and get the subChoice from user.
                     System.out.println("\n1. Edit a Student");
                     System.out.println("2. Remove a Student");
                     System.out.println("3. Return to the main menu");
                     System.out.print("Choose an option: ");
                     int subChoice = input.nextInt();
+                    //Get user's subchoice and edit, remove or return
                     if (subChoice == 1) {
                         System.out.print("Enter student ID to edit: ");
                         int id = input.nextInt();
+                        //get their id number and let them edit it
                         if (id >= 0 && id < marks.size()) {
                             System.out.print("Enter new first name: ");
                             firstNames.set(id, input.next());
@@ -115,6 +123,7 @@ public class ISU {
                     } else if (subChoice == 2) {
                         System.out.print("Enter student ID to remove: ");
                         int id = input.nextInt();
+                        //get their id number and let them remove a student
                         if (id >= 0 && id < marks.size()) {
                             firstNames.remove(id);
                             lastNames.remove(id);
@@ -123,15 +132,15 @@ public class ISU {
                         } else
                             System.out.println("Invalid student ID.");
                     } else if (subChoice == 3)
+                        //Return to main menu
                         System.out.println("Returning to main menu...");
                     else
                         System.out.println("Invalid option.");
 
                     break;
-
+                //Display the marks distribution chart
                 case 5:
                     int countA = 0, countB = 0, countC = 0, countD = 0, countF = 0;
-
                     // count grades
                     for (int i = 0; i < marks.size(); i++) {
                         int m = marks.get(i);
@@ -146,6 +155,7 @@ public class ISU {
                         else
                             countF++;
                     }
+                    //look which has the most people which is highest in the chart.
                     int max = countA;
                     if (countB > max)
                         max = countB;
@@ -155,9 +165,8 @@ public class ISU {
                         max = countD;
                     if (countF > max)
                         max = countF;
-
+                    //From the highest of the chart, if that grade has that many people, put a *, if not put a space.
                     for (int level = max; level > 0; level--) {
-
                         if (countA >= level)
                             System.out.print(" * ");
                         else
@@ -181,7 +190,7 @@ public class ISU {
                     System.out.println("-------------------------");
                     System.out.println(" A   B   C   D   F");
                     break;
-
+                //Search a students and check if they are higher or lower than the average.
                 case 6:
                     System.out.print("Enter a first name or last name to search: ");
                     String keyword = input.next().toLowerCase();
