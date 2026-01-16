@@ -171,22 +171,16 @@ public class ISU {
                             System.out.print(" * ");
                         else
                             System.out.print("   ");
-
                         if (countB >= level) System.out.print(" * ");
                         else System.out.print("   ");
-
                         if (countC >= level) System.out.print(" * ");
                         else System.out.print("   ");
-
                         if (countD >= level) System.out.print(" * ");
                         else System.out.print("   ");
-
                         if (countF >= level) System.out.print(" * ");
                         else System.out.print("   ");
-
                         System.out.println();
                     }
-
                     System.out.println("-------------------------");
                     System.out.println(" A   B   C   D   F");
                     break;
@@ -203,6 +197,7 @@ public class ISU {
                             System.out.println("ID: " + i);
                             System.out.println("Name: " + firstNames.get(i) + " " + lastNames.get(i));
                             System.out.println("Mark: " + marks.get(i));
+                            //after finding the student look if he/her is above or below the mean
                             if (marks.get(i) > average)
                                 System.out.println("This student is ABOVE the class average.");
                             else if (marks.get(i) == average)
@@ -215,7 +210,9 @@ public class ISU {
                     if (!found)
                         System.out.println("No student found.");
                     break;
+                    //Find the top and bottom 20%
                 case 7:
+                    //use a temperately array list to organize the marks highest to lowest. 
                     int total = marks.size();
                     int[] temp = new int[total];
                     for (int i = 0; i < marks.size(); i++) {
@@ -230,11 +227,13 @@ public class ISU {
                             }
                         }
                     }
+                    //Find the higher and lower cutoffs (percentile).
                     int lowIn = (int)(0.2 * total);
                     int highIn = (int)(0.8 * total);
                     int lowCutoff = temp[lowIn];
                     int highCutoff = temp[highIn];
                     System.out.println("Bottom 20%:");
+                    //Print the names and marks for those students who are in the ranges.
                     for (int i = 0; i < total; i++) {
                         if (marks.get(i) <= lowCutoff)
                             System.out.println(firstNames.get(i) + " " + lastNames.get(i) + " - " + marks.get(i));
@@ -246,12 +245,12 @@ public class ISU {
                             System.out.println(firstNames.get(i) + " " + lastNames.get(i) + " - " + marks.get(i));
                     }
                     break;
-
+                //Exit the loop by changing the while condition false
                 case 8:
                     System.out.println("Thank you for using the CMS!");
                     run = false;
                     break;
-
+                //Error Checking.    
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
